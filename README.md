@@ -20,7 +20,7 @@ julia +1.9.3 --project --threads=auto
 You may need to restart Julia at this point before proceeding.
 
 ```julia
-julia> using VehicleSim
+julia> using Revise, VehicleSim
 ```
 
 # Running Simulation

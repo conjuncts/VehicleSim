@@ -81,7 +81,7 @@ function logger(info_channel, shutdown_channel, num_vehicles)
             cam = frequencies[i]["cam"]
             gt = frequencies[i]["gt"]
             sent = frequencies[i]["sent"]
-            @printf("Vehicle %i: gps freq: %6.3f, imu freq: %6.3f, cam freq: %6.3f, gt freq: %6.3f, send freq: %6.3f \u1b[0K \n", i, gps, imu, cam, gt, sent)
+            # @debug("Vehicle %i: gps freq: %6.3f, imu freq: %6.3f, cam freq: %6.3f, gt freq: %6.3f, send freq: %6.3f \u1b[0K \n", i, gps, imu, cam, gt, sent)
         end
         @printf("%s \u1b[0K \n", sim_info_str)
         @printf("%s \u1b[0K \n", vehicle_connection_str)
@@ -97,10 +97,10 @@ function server(max_vehicles=1,
         no_mesh=false,
         map_type=:city,
         rng=MersenneTwister(1), 
-        measure_gps=false, 
+        measure_gps=false, # false, 
         measure_imu=false, 
         measure_cam=false, 
-        measure_gt=false,
+        measure_gt=true, # false,
         measure_all=false,
         monitor_rates=true)
 
@@ -119,7 +119,9 @@ function server(max_vehicles=1,
         -Connect a keyboard client by running (in a new REPL):
             using VehicleSim, Sockets
             keyboard_client(ip\"$host\");
-        -Port for manual clients is $port"
+        -Port for manual clients is $port
+        -PID: $(getpid())"
+
     @info server_info_string
     #@info inform_hostport(server_visualizer, "Server visualizer")
     #client_visualizers = [get_vis(map, false, host) for _ in 1:max_vehicles]
